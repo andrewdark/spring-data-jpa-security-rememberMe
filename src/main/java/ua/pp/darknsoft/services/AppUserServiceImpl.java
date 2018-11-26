@@ -9,7 +9,7 @@ import ua.pp.darknsoft.repositories.UserRepository;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class AppUserServiceImpl implements AppUserService {
     @Autowired
     UserRepository userRepository;
 
