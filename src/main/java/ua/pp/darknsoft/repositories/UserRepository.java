@@ -1,4 +1,7 @@
 package ua.pp.darknsoft.repositories;
 
-public interface UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import ua.pp.darknsoft.models.AppUser;
+
+public interface UserRepository extends JpaRepository<AppUser, Long> {
 }
