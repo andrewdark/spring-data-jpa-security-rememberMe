@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="no_auth">
+    <ul class="h-menu">
+        <li>
+            <a href="">Информация визитера</a>
+            <ul>
+                <li><a href="#">Информация 1</a></li>
+                <li><a href="#">Информация 2</a></li>
+                <li><a href="#">Информация 3</a></li>
+                <li><a href="#">Информация 4</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Пользователь</a>
+            <ul>
+                <li><a href="/login">Вход</a></li>
+                <li><a href="/registration">Регистрация</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div th:fragment="head_user">
+    <ul class="h-menu">
+        <li><a href="">Информация пользователя</a>
+            <ul>
+                <li><a href="">Левая инфо 1</a></li>
+                <li><a href="">Левая инфо 2</a></li>
+                <li><a href="">Левая инфо 3</a></li>
+                <li><a href="">Левая инфо 4</a></li>
+                <li><a href="">Левая инфо 5</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Личный кабинет</a>
+            <ul>
+                <li><a href="/userPage">Моя страница</a></li>
+                <li><a href="#">Настройки</a></li>
+                <li><a href="#">Персональные данные</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Выход</a></li>
+    </ul>
+
+</div>
+<div th:fragment="head_admin">
+    <ul class="h-menu">
+        <li>
+            <a href="">Роли</a>
+            <ul>
+                <li><a href="#">Список</a></li>
+                <li><a href="#">Создать</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Пользователи</a>
+            <ul>
+                <li><a href="#">Список</a></li>
+                <li><a href="#">Активные</a></li>
+                <li><a href="#">Заблокированые</a></li>
+                <li><a href="#">Создать</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Личный кабинет</a>
+            <ul>
+                <li><a href="/adminPage">Моя страница</a></li>
+                <li><a href="#">Настройки</a></li>
+                <li><a href="#">Персональные данные</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Выход</a></li>
+    </ul>
+</div>
+<div th:fragment="head_403">
+    <ul class="h-menu">
+        <li><a href="/">На главную</a></li>
+        <li><a href="/logout">Выход</a></li>
+    </ul>
+</div>
+</body>
+</html>

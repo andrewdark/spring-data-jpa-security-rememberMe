@@ -1,32 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>hello</title>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{css/head-menu.css}">
+    <script type="text/javascript" th:src="@{/js/head-menu.js}"></script>
 </head>
 <body>
-<b>HELLO</b>
-<table border="1">
-    <thead>
-    <tr>
-        <td>ID</td>
-        <td>UserName</td>
-        <td>EncryptedPassword</td>
-        <td>Enabled</td>
-        <td>Created</td>
-        <td>LastLogin</td>
-        <td>Version</td>
-    </tr>
-    </thead>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.userName}"></td>
-        <td th:text="${user.encryptedPassword}"></td>
-        <td th:text="${user.enabled}"></td>
-        <td th:text="${user.created}"></td>
-        <td th:text="${user.lastLogin}"></td>
-        <td th:text="${user.version}"></td>
-    </tr>
-</table>
+<div th:replace="fragments/headers :: ${headers}">
+
+</div>
+<div th:replace="fragments/bodies :: ${bodies}">
+
+
+</div>
 </body>
 </html>

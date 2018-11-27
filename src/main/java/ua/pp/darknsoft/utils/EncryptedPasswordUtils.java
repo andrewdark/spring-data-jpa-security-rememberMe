@@ -10,7 +10,7 @@ public class EncryptedPasswordUtils {
     }
 
     public static void main(String[] args) {
-        String password = "admin"; //$2a$10$UMArHQ.Iiy3GUMxZh6Fg7.gtApfENtgYDM6TQViAObopAjSqYtmSO
+        String password = "user02"; //$2a$10$UMArHQ.Iiy3GUMxZh6Fg7.gtApfENtgYDM6TQViAObopAjSqYtmSO
         String encrytedPassword = encryptPassword(password);
 
         System.out.println("Encryted Password: " + encrytedPassword);
