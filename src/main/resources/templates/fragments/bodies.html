@@ -57,6 +57,46 @@
 
 <div th:fragment="registration">
     <h1>REGISTRATION FORM</h1>
+    <div th:if="${errorMessage != null}"
+         th:utext="${errorMessage}" class="error" style="color:red;">...
+    </div>
+    <form th:action="@{/registration}" th:object="${appUser}" method="post">
+        <table>
+            <tr>
+                <td>User Name</td>
+                <td><input type="text" th:field="*{userName}"/></td>
+                <td>
+                    <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">..</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" th:field="*{encryptedPassword}"/></td>
+                <td>
+                    <span th:if="${#fields.hasErrors('encryptedPassword')}" th:errors="*{encryptedPassword}">..</span>
+                </td>
+            </tr>
+            <!--<tr>-->
+            <!--<td>Confirm</td>-->
+            <!--<td><input type="password" th:field="*{confirmPassword}" /> </td>-->
+            <!--<td>-->
+            <!--<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Submit"/>
+                    <a th:href="@{/}">Cancel</a>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div th:fragment="body_registerSuccessful">
+    <h1>Congratulation!</h1>
+    <h3>Registration is success, please login on <a href="/login">login page</a></h3>
 </div>
 </body>
 </html>

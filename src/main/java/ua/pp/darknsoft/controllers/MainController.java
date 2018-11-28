@@ -5,7 +5,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ua.pp.darknsoft.models.AppUser;
 import ua.pp.darknsoft.services.AppUserService;
 
 import java.security.Principal;
@@ -25,9 +31,51 @@ public class MainController {
 
     @GetMapping(value = {"/registration", "/reg"})
     public String registration(Model dasModel) {
-
+        dasModel.addAttribute("appUser", new AppUser());
         dasModel.addAttribute("headers", "no_auth");
         dasModel.addAttribute("bodies", "registration");
+        return "index";
+    }
+
+    @PostMapping(value = "/registration")
+    public String saveRegister(Model model, //
+                               @ModelAttribute("appUser") @Validated AppUser appUserForm, //
+                               BindingResult result, //
+                               final RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            model.addAttribute("headers", "no_auth");
+            model.addAttribute("bodies", "registration");
+            return "index";
+        }
+        AppUser newUser = null;
+
+        if (appUserService.isExists(appUserForm)) {
+            model.addAttribute("errorMessage", "Error: " + "User " + appUserForm.getUserName() + " is exist");
+            model.addAttribute("headers", "no_auth");
+            model.addAttribute("bodies", "registration");
+            return "index";
+        }
+
+        try {
+            newUser = appUserService.createAppUser(appUserForm);
+        }
+        // Other error!!
+        catch (Exception e) {
+            model.addAttribute("errorMessage", "Error: " + e.getMessage());
+            model.addAttribute("headers", "no_auth");
+            model.addAttribute("bodies", "registration");
+            return "index";
+        }
+
+        redirectAttributes.addFlashAttribute("flashUser", newUser);
+
+        return "redirect:/registerSuccessful";
+    }
+
+    @GetMapping(value = "/registerSuccessful")
+    public String registerSuccessful(Model dasModel) {
+        dasModel.addAttribute("headers", "head_user");
+        dasModel.addAttribute("bodies", "body_registerSuccessful");
         return "index";
     }
 
@@ -44,7 +92,7 @@ public class MainController {
         if (authentication != null) {
             System.out.println("authentication.getCredentials(): ");
             System.out.println(authentication.getCredentials());
-            if(authentication.getAuthorities().iterator().hasNext()){
+            if (authentication.getAuthorities().iterator().hasNext()) {
                 System.out.println("authentication.getAuthorities().iterator(): ");
                 System.out.println(authentication.getAuthorities().iterator().next());
             }
