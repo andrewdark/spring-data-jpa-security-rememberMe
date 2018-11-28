@@ -7,6 +7,7 @@
 <body>
 <div th:fragment="no_auth">
     <ul class="h-menu">
+        <li><a href="/">Главная страница</a></li>
         <li>
             <a href="">Информация визитера</a>
             <ul>
@@ -25,8 +26,9 @@
         </li>
     </ul>
 </div>
-<div th:fragment="head_user">
+<div th:fragment="role_user">
     <ul class="h-menu">
+        <li><a href="/">Главная страница</a></li>
         <li><a href="">Информация пользователя</a>
             <ul>
                 <li><a href="">Левая инфо 1</a></li>
@@ -48,8 +50,9 @@
     </ul>
 
 </div>
-<div th:fragment="head_admin">
+<div th:fragment="role_admin">
     <ul class="h-menu">
+        <li><a href="/">Главная страница</a></li>
         <li>
             <a href="">Роли</a>
             <ul>
@@ -77,9 +80,9 @@
         <li><a href="/logout">Выход</a></li>
     </ul>
 </div>
-<div th:fragment="head_403">
+<div th:fragment="error_403">
     <ul class="h-menu">
-        <li><a href="/">На главную</a></li>
+        <li><a href="/">Главная страница</a></li>
         <li><a href="/logout">Выход</a></li>
     </ul>
 </div>

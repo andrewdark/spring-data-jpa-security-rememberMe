@@ -74,8 +74,8 @@ public class MainController {
 
     @GetMapping(value = "/registerSuccessful")
     public String registerSuccessful(Model dasModel) {
-        dasModel.addAttribute("headers", "head_user");
-        dasModel.addAttribute("bodies", "body_registerSuccessful");
+        dasModel.addAttribute("headers", "no_auth");
+        dasModel.addAttribute("bodies", "registerSuccessful");
         return "index";
     }
 
@@ -86,7 +86,8 @@ public class MainController {
 
         if (principal != null) {
             System.out.println("UserName: " + principal.getName());
-            headers = "head_user";
+            headers = "role_user";
+            bodies = "auth";
         }
 
         if (authentication != null) {
@@ -105,15 +106,15 @@ public class MainController {
 
             if (authentication.getAuthorities()
                     .contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-                headers = "head_user";
-                bodies = "body_user";
+                headers = "role_user";
+                bodies = "role_user";
                 System.out.println("ROLE_USER - " + authentication.getAuthorities()
                         .contains(new SimpleGrantedAuthority("ROLE_USER")));
             }
             if (authentication.getAuthorities()
                     .contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-                headers = "head_admin";
-                bodies = "body_admin";
+                headers = "role_admin";
+                bodies = "role_admin";
                 System.out.println("ROLE_ADMIN - " + authentication.getAuthorities()
                         .contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
             }
@@ -127,22 +128,22 @@ public class MainController {
 
     @GetMapping(value = "/userPage")
     public String userPage(Model dasModel) {
-        dasModel.addAttribute("headers", "head_user");
-        dasModel.addAttribute("bodies", "body_user");
+        dasModel.addAttribute("headers", "role_user");
+        dasModel.addAttribute("bodies", "role_user");
         return "index";
     }
 
     @GetMapping(value = "/adminPage")
     public String adminPage(Model dasModel) {
-        dasModel.addAttribute("headers", "head_admin");
-        dasModel.addAttribute("bodies", "body_admin");
+        dasModel.addAttribute("headers", "role_admin");
+        dasModel.addAttribute("bodies", "role_admin");
         return "index";
     }
 
     @GetMapping(value = "/403")
     public String error403(Model dasModel) {
-        dasModel.addAttribute("headers", "head_403");
-        dasModel.addAttribute("bodies", "body_403");
+        dasModel.addAttribute("headers", "error_403");
+        dasModel.addAttribute("bodies", "error_403");
         return "index";
     }
 }
