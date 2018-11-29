@@ -1,6 +1,8 @@
 package ua.pp.darknsoft.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +21,18 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<AppUser> findAll() {
-        return userRepository.findAll();
+    public Page<AppUser> getAll(Pageable page) {
+        return userRepository.findAll(page);
+    }
+
+    @Override
+    public Page<AppUser> getAllEnabled(Pageable page) {
+        return userRepository.findAllByEnabled(true, page);
+    }
+
+    @Override
+    public Page<AppUser> getAllDisabled(Pageable page) {
+        return userRepository.findAllByEnabled(false, page);
     }
 
     @Transactional(readOnly = true)

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>admin bodies</title>
+</head>
+<body>
+<div th:fragment="user_list_paginator">
+    <table class="blueTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>EncryptedPassword</th>
+            <th>Enabled</th>
+            <th>Created</th>
+            <th>LastLogin</th>
+            <th>Version</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td>
+                <div class="links">
+                    <a class="active" href="/reg">Створити нового</a>
+                </div>
+            </td>
+            <td colspan="6">
+                <div class="links" th:with="varName=${'&size=10&sort=userName'}">
+                    <div th:if="${allUsers.number}== 0">
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.number} + ${varName} }">&laquo;</a>
+                        <a class="active" th:href="@{'/admin/users?page=0' + ${varName}} ">1</a>
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.totalPages - 1} + ${varName}} "
+                           th:text="${allUsers.totalPages}"></a>
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.number + 1} + ${varName}}">&raquo;</a>
+                    </div>
+                    <div th:if="0 < ${allUsers.number} and ${allUsers.number} < ${allUsers.totalPages}">
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.number - 1} + ${varName}}">&laquo;</a>
+                        <a class="active" th:href="@{'/admin/users?page=0' + ${varName}} ">1</a>
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.totalPages - 1} + ${varName}} "
+                           th:text="${allUsers.totalPages}"></a>
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.number + 1} + ${varName}}">&raquo;</a>
+                    </div>
+                    <div th:if="${allUsers.number} == ${allUsers.totalPages}">
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.number - 1} + ${varName}}">&laquo;</a>
+                        <a class="active" th:href="@{'/admin/users?page=0' + ${varName}} ">1</a>
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.totalPages - 1} + ${varName}} "
+                           th:text="${allUsers.totalPages}"></a>
+                        <a th:href="@{'/admin/users?page=' + ${allUsers.number} + ${varName}}">&raquo;</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr th:each="user: ${allUsers.content}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.userName}"></td>
+            <td th:text="[PROTECTED]"></td>
+            <td th:text="${user.enabled}"></td>
+            <td th:text="${user.created}"></td>
+            <td th:text="${user.lastLogin}"></td>
+            <td th:text="${user.version}"></td>
+
+            <td><a th:href="@{'/admin/users/'+${user.id}}">Деталі</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
